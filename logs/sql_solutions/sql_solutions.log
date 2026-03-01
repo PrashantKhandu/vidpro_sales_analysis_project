@@ -1,0 +1,12 @@
+2026-03-02_01:30 | INFO | init_postgres_connection.py | 21 | sql_solutions | Msg:New Postgre-SQL connection connected to localhost
+2026-03-02_01:30 | INFO | init_postgres_connection.py | 22 | sql_solutions | Msg:New connection created to Postgre-SQL Database.
+2026-03-02_01:30 | INFO | sql_solutions.py | 85 | sql_solutions | Msg:Program execution started
+2026-03-02_01:30 | INFO | sql_solutions.py | 69 | sql_solutions | Msg:Data fetching starting...
+2026-03-02_01:30 | CRITICAL | sql_solutions.py | 77 | sql_solutions | Msg:fetch_data() takes 0 positional arguments but 1 was given
+2026-03-02_01:30 | ERROR | sql_solutions.py | 78 | sql_solutions | Msg:Traceback (most recent call last):
+  File "D:\Projects\vidpro_sales_analysis_project\solutions\sql_solutions.py", line 70, in main
+    headers, rows = fetch_data(connection)
+                    ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: fetch_data() takes 0 positional arguments but 1 was given
+
+2026-03-02_01:30 | INFO | sql_solutions.py | 87 | sql_solutions | Msg:Program exection completed successfully

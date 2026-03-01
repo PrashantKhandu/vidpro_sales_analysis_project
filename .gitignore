@@ -1,0 +1,5 @@
+*~*
+test.py
+*.py.bak
+*cpython*
+*pycache*

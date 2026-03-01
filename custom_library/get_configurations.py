@@ -2,13 +2,11 @@ import configparser
 import sys, os
 
 sys.path.append(os.getcwd())
-from init_logger import get_logger
-from ..project_constants import CONFIG_FILE
+from project_constants import CONFIG_FILE
 
 def get_configuration(*args:str):
-    logger = get_logger()
     if not os.path.exists(CONFIG_FILE):
-        logger.critical(f"config.ini file doesn't exist in {CONFIG_FILE}")
+        print(f"config.ini file doesn't exist in {CONFIG_FILE}")
         exit()
 
     args = [arg.upper() for arg in args]

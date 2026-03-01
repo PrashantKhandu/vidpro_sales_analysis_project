@@ -5,8 +5,10 @@ import logging.config
 import sys
 import os
 
-sys.path.append(os.getcwd())
-from get_configurations import *
+PROJECT_FOLDER_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_FOLDER_PATH)
+from custom_library.get_configurations import *
+from project_constants import *
 
 g_logger = None
 g_logger_name = None
@@ -21,7 +23,7 @@ def get_logger(logger_name=None):
             g_logger_name = logger_name
         else:
             # when invoked for the first time, get_logger must be supplied with the logger name
-            logging.config.fileConfig(os.path.join("logger_config.conf"), {"filename": os.path.join("logs", "default", "default" + ".log").replace("\\", "/")})
+            logging.config.fileConfig(os.path.join(CONFIG_FOLDER, "logger_config.conf"), {"filename": os.path.join(LOG_FOLDER, "default", "default" + ".log").replace("\\", "/")})
             logger = logging.getLogger("default")
             logger.warning("Logger name must be provided when logger is initialized for first time. Using the default",)
             stack = traceback.format_stack()
@@ -29,8 +31,7 @@ def get_logger(logger_name=None):
             logger.warning(stack)
             return logger
 
-        logging.config.fileConfig(
-            os.path.join("logger_config.conf"), {"filename": os.path.join("osint", "logs", g_logger_name, g_logger_name + ".log").replace("\\", "/")})
+        logging.config.fileConfig(os.path.join(CONFIG_FOLDER, "logger_config.conf"), {"filename": os.path.join(LOG_FOLDER, g_logger_name, g_logger_name + ".log").replace("\\", "/")})
         g_logger = logging.getLogger(g_logger_name)
     elif logger_name != None:
         # when invoked second time or later, log a warning message if logger name is supplied again.

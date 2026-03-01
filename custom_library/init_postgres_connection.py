@@ -4,7 +4,8 @@ import sys
 import os
 
 sys.path.append(os.getcwd())
-from get_configurations import *
+from custom_library.get_configurations import *
+from custom_library.init_logger import get_logger
 
 def get_new_postgreSQL_connection(dbname: str):
     """

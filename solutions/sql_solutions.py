@@ -3,11 +3,11 @@ import csv
 import sys
 import os
 
-sys.path.append(os.getcwd())
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from ..custom_library.init_postgres_connection import get_new_postgreSQL_connection
-from ..custom_library.init_logger import get_logger
-from ..utils.project_constants import *
+from custom_library.init_postgres_connection import get_new_postgreSQL_connection
+from custom_library.init_logger import get_logger
+from project_constants import *
 
 logger = None
 connection = None
@@ -73,18 +73,22 @@ def main():
         logger.info(f"Data writing starting...")
         write_csv(headers, rows)
         logger.info("Data write into csv file completed")
+        return True
     except Exception as e:
         logger.critical(e)
         logger.error(traceback.format_exc())
-
+        return False
 
 if __name__ == "__main__":
     logger = get_logger(SQL_SOLUTIONS)
     connection = get_new_postgreSQL_connection(dbname=INTERVIEW)
     try:
         logger.info("Program execution started")
-        main()
-        logger.info("Program exection completed successfully")
+        status = main()
+        if status:
+            logger.info("Program exection completed successfully")
+        else:
+            logger.warning("Strange error. Please see the logs...")
     except Exception as e:
         logger.error(f"Program execution failed due to {e}")
         logger.error(traceback.format_exc())
